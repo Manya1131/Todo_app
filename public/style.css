@@ -1,0 +1,151 @@
+/* ===== Modern Glassmorphism Theme ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f3bb8e 0%, #0ed2f7 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* ===== Card Container ===== */
+.container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  width: 380px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  text-align: center;
+  animation: fadeIn 0.7s ease;
+}
+
+h1 {
+  color: #1b1b1b;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ===== Input & Button ===== */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  outline: none;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+input:focus {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #4e9af1;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #4e9af1, #007bff);
+  color: white;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+button:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #3c8de3, #0056d1);
+}
+
+/* ===== Task List ===== */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+li {
+  background: rgba(255, 255, 255, 0.4);
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+li:hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Task Text ===== */
+li span {
+  font-weight: 500;
+  color: #222;
+}
+
+.done span {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* ===== Buttons inside tasks ===== */
+.task-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.complete,
+.delete {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  color: white;
+}
+
+.complete {
+  background: #00c851;
+}
+.complete:hover {
+  background: #00913b;
+}
+
+.delete {
+  background: #ff4444;
+}
+.delete:hover {
+  background: #cc0000;
+}
+
+.logout {
+  background: #ff6b6b;
+  margin-top: 15px;
+}
+.logout:hover {
+  background: #d63a3a;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

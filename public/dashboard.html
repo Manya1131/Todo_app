@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Todo App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>My Tasks</h1>
+    <input id="task" placeholder="Enter a new task..." />
+    <button onclick="addTask()">Add Task</button>
+    <ul id="list"></ul>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    async function loadTasks() {
+      const res = await fetch("/tasks");
+      const data = await res.json();
+
+      if (data.msg === "Login required") {
+        location.href = "login.html";
+        return;
+      }
+
+      document.getElementById("list").innerHTML = data
+        .map(
+          (t) => `
+        <li class="${t.status === "completed" ? "done" : ""}">
+          <span>${t.title}</span>
+          <div class="task-btns">
+            ${
+              t.status === "pending"
+                ? `<button class="complete" onclick="completeTask(${t.id})">✔</button>`
+                : ""
+            }
+            <button class="delete" onclick="deleteTask(${t.id})">🗑</button>
+          </div>
+        </li>`
+        )
+        .join("");
+    }
+
+    async function addTask() {
+      const title = document.getElementById("task").value.trim();
+      if (!title) return alert("Please enter a task!");
+
+      await fetch("/add-task", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+      });
+      document.getElementById("task").value = "";
+      loadTasks();
+    }
+
+    async function completeTask(id) {
+      await fetch(`/complete-task/${id}`, { method: "POST" });
+      loadTasks();
+    }
+
+    async function deleteTask(id) {
+      await fetch(`/delete-task/${id}`, { method: "DELETE" });
+      loadTasks();
+    }
+
+    async function logout() {
+      await fetch("/logout");
+      location.href = "login.html";
+    }
+
+    loadTasks();
+  </script>
+</body>
+</html>
